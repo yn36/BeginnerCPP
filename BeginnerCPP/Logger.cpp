@@ -51,26 +51,12 @@ Logger::Logger(log_target target, log_level level, std::string path)
 
 void Logger::output(std::string text, log_level act_level)
 {
-	std::string prefix;
-	if (act_level == debug) {
-		prefix = "[DEBUG]   ";
-	}
-	else if (act_level == info)
-	{
-		prefix = "[INFO]   ";
-	}
-	else if (act_level == warning)
-	{
-		prefix = "[WARNING]   ";
-	}
-	else if (act_level == error)
-	{
-		prefix = "[ERROR]   ";
-	}
-	else
-	{
-		prefix = "";
-	}
+	std::string prefix = "";
+	if (act_level == debug) prefix = "[DEBUG]   ";
+	else if (act_level == info) prefix = "[INFO]   ";
+	else if (act_level == warning) prefix = "[WARNING]   ";
+	else if (act_level == error) prefix = "[ERROR]   ";
+
 	prefix += __FILE__;
 	prefix += " ";
 	std::string output_content = prefix + GetCurrentTime() + " : " + text + "\n";

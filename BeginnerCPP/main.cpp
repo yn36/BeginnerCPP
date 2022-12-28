@@ -12,13 +12,14 @@ int main()
 	}
 	Log("hello world", INFO);*/
 
-	Logger logger(Logger::file_and_terminal, Logger::debug, "result.log");
+	/*Logger logger(Logger::file_and_terminal, Logger::debug, "result.log");
 	logger.DEBUG("What happend?");
 	logger.INFO("This is good.");
 	logger.WARNING("Yes...");
-	logger.ERROR("IO Error!");
+	logger.ERROR("IO Error!");*/
 
-
+	int var = 8;
+	void* ptr = &var;
 
 	//std::cout << GetCurrentTime() << std::endl;
 	std::cin.get();
