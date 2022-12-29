@@ -5,6 +5,6 @@
 #include <time.h>
 
 // 获取当前时间
-std::string GetCurrentTime();
+std::string GetCurrentTime(const char* format = "%Y-%m-%d %H:%M:%S");
 
 #endif // !_TIME_H

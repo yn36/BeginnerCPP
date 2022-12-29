@@ -1,12 +1,14 @@
 #include "Logger.h"
 #include "Time.h"
+#include "Directory.h"
+#include <filesystem>
 
 // 默认构造函数
 Logger::Logger()
 {
 	this->target = terminal;
 	this->level = debug;
-	std::cout << "[WELCOME]" << __FILE__ << " " << GetCurrentTime() << " : " << "=== Start logging ===" << std::endl;
+	std::cout << "[Welcome]" << __FILE__ << " " << GetCurrentTime() << " : " << "================== 开始记录 ==================" << std::endl;
 }
 
 std::string Logger::GetLevelColor(const log_level level)
@@ -31,13 +33,17 @@ std::string Logger::GetLevelColor(const log_level level)
 }
 
 
-Logger::Logger(log_target target, log_level level, std::string path)
+Logger::Logger(log_target target, log_level level)
 {
 	this->target = target;
-	this->path = path;
 	this->level = level;
 	std::string tmp = "";
-	std::string welcome_dialog = tmp + "[Welcome] " + __FILE__ + "" + GetCurrentTime() + " : " + "=== Start logging ===\n";
+	std::string welcome_dialog = tmp + "[Welcome] " + __FILE__ + "" + GetCurrentTime() + " : " + "================== 开始记录 ==================\n";
+	std::string path = std::filesystem::current_path().string();
+	path += "\\logs\\";
+	path += GetCurrentTime("%Y%m%d");
+	path += ".log";
+	CreateDirectory(path);
 	if (target != terminal)
 	{
 		this->outfile.open(path, std::ios::out | std::ios::app);  // 打开输出文件
@@ -85,4 +91,18 @@ void Logger::WARNING(std::string text)
 void Logger::ERROR(std::string text)
 {
 	this->output(text, error);
+}
+
+void Logger::Exit()
+{
+	std::string output_content = "[" + GetCurrentTime() + "] : " + "程序退出。。。。。。\n\n\n";
+
+	if (target != file)
+	{
+		std::cout << output_content;
+	}
+	if (target != terminal)
+	{
+		//outfile << output_content;
+	}
 }
