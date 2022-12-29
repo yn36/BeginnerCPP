@@ -62,7 +62,6 @@ void Logger::output(std::string text, log_level act_level)
 	else if (act_level == info) prefix = "[INFO]   ";
 	else if (act_level == warning) prefix = "[WARNING]   ";
 	else if (act_level == error) prefix = "[ERROR]   ";
-	prefix += " ";
 	std::string output_content = prefix + GetCurrentTime() + " : " + text + "\n";
 	if (this->level <= act_level && this->target != file)
 	{
