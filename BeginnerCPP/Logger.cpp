@@ -38,7 +38,7 @@ Logger::Logger(log_target target, log_level level)
 	this->target = target;
 	this->level = level;
 	std::string tmp = "";
-	std::string welcome_dialog = tmp + "[Welcome] " + __FILE__ + "" + GetCurrentTime() + " : " + "================== 开始记录 ==================\n";
+	std::string welcome_dialog = tmp + "[Welcome] " + "" + GetCurrentTime() + " : " + "================== 开始记录 ==================\n";
 	std::string path = std::filesystem::current_path().string();
 	path += "\\logs\\";
 	path += GetCurrentTime("%Y%m%d");
@@ -62,8 +62,6 @@ void Logger::output(std::string text, log_level act_level)
 	else if (act_level == info) prefix = "[INFO]   ";
 	else if (act_level == warning) prefix = "[WARNING]   ";
 	else if (act_level == error) prefix = "[ERROR]   ";
-
-	prefix += __FILE__;
 	prefix += " ";
 	std::string output_content = prefix + GetCurrentTime() + " : " + text + "\n";
 	if (this->level <= act_level && this->target != file)
